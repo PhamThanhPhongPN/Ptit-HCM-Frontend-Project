@@ -1,0 +1,67 @@
+body {
+    background-color: whitesmoke;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+}
+
+p {
+    color: gray;
+}
+
+.login_container {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    text-align: left;
+    padding: 15px;
+    gap: 10px;
+}
+
+input {
+    width: 90%;
+    border-radius: 7px;
+    height: 60px;
+    border: 1px solid gainsboro;
+    text-align: center;
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+button {
+    width: 90%;
+    height: 55px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-size: small;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+label {
+    width: 90%;
+    text-align: left;
+    font-weight: bold;
+}

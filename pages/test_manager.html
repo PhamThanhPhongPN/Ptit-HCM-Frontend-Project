@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestManager</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/test_manager.css">
+</head>
+<body>
+    <header>
+        <h4>QuizzForge</h4>
+        <div class="texts">
+            <p>Danh mục</p>
+            <p>Bài test</p>
+            <p>Đăng xuất</p>
+        </div>
+    </header>
+    <main class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Quản lý bài test</h2>
+            <button class="btn btn-primary">Thêm bài test</button>
+        </div>
+    
+        <div style="display: flex; justify-content: flex-end; margin: 10px 0;">
+            <label for="filter">Sắp xếp theo:</label>
+            <select id="filter" style="margin-left: 8px;">
+                <option value="all">Tất cả</option>
+                <option value="time">Thời gian</option>
+                <option value="questions">Số câu hỏi</option>
+            </select>
+            <input type="text" placeholder="Tìm kiếm theo tên" style="margin-left: 12px; padding: 5px;">
+        </div>
+    
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tên bài test</th>
+                    <th>Danh mục</th>
+                    <th>Số câu hỏi</th>
+                    <th>Thời gian</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>History Quiz</td>
+                    <td>📘 Lịch sử</td>
+                    <td>15</td>
+                    <td>10 min</td>
+                    <td>
+                        <button class="btn btn-warning">Sửa</button>
+                        <button class="btn btn-danger">Xoá</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Science Challenge</td>
+                    <td>🧪 Khoa học</td>
+                    <td>20</td>
+                    <td>15 min</td>
+                    <td>
+                        <button class="btn btn-warning">Sửa</button>
+                        <button class="btn btn-danger">Xoá</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <div class="pagination">
+            <button disabled>«</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>»</button>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2025 Quizz App. All rights reserved.</p>
+    </footer>
+</body>
+</html>
