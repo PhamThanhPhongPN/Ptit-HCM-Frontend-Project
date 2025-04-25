@@ -50,6 +50,9 @@
 .pagination {
     text-align: center;
     margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .pagination button {

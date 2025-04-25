@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestManager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/test_manager.css">
 </head>
@@ -16,20 +17,39 @@
             <p>Đăng xuất</p>
         </div>
     </header>
-    <main class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Quản lý bài test</h2>
-            <button class="btn btn-primary">Thêm bài test</button>
+    <div class="modal" id="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm bài test</h5>
+                </div>
+                <div class="modal-body">
+                    <input id="testName" type="text" class="form-control" placeholder="Tên bài test">
+                    <input id="testCategory" type="text" class="form-control mt-2" placeholder="Danh mục">
+                    <input id="testQuestions" type="number" class="form-control mt-2" placeholder="Số câu hỏi">
+                    <input id="testTime" type="text" class="form-control mt-2" placeholder="Thời gian">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="saveAddTestBtn">Save</button>
+                    <button class="btn btn-secondary" id="closeAddTestBtn">Close</button>
+                </div>
+            </div>
         </div>
+    </div>
     
-        <div style="display: flex; justify-content: flex-end; margin: 10px 0;">
-            <label for="filter">Sắp xếp theo:</label>
-            <select id="filter" style="margin-left: 8px;">
-                <option value="all">Tất cả</option>
-                <option value="time">Thời gian</option>
-                <option value="questions">Số câu hỏi</option>
-            </select>
-            <input type="text" placeholder="Tìm kiếm theo tên" style="margin-left: 12px; padding: 5px;">
+    <main class="container">
+            <h2>Quản lý bài test</h2>
+        <div style="display: flex; justify-content: flex-end; margin: 10px 0; justify-content: space-between;">
+            <button class="btn btn-primary" id="openAddTestBtn">Thêm bài test</button>   
+            <div>
+                <label for="filter">Sắp xếp theo:</label>
+                <select id="filter" style="margin-left: 8px;">
+                    <option value="all">Tất cả</option>
+                    <option value="time">Thời gian</option>
+                    <option value="questions">Số câu hỏi</option>
+                </select>
+                <input type="text" placeholder="Tìm kiếm theo tên" style="margin-left: 12px; padding: 5px;">
+            </div>
         </div>
     
         <table class="category-table">
@@ -80,5 +100,7 @@
     <footer>
         <p>© 2025 Quizz App. All rights reserved.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="../js/test_manager.js"></script>
 </body>
 </html>
