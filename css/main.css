@@ -12,6 +12,7 @@ header {
     align-items: center;
     height: 35px;
     color: white;
+    margin-top: 0px;
 }
 
 footer {
@@ -41,6 +42,9 @@ h4 {
     margin-right: 15px;
 }
 
+
 body {
+    margin: 0;
     background-color: whitesmoke;
+    padding: 0;
 }

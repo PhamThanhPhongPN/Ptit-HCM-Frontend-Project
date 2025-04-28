@@ -76,3 +76,15 @@
 .input_text {
     font-weight: bold;
 }
+
+.headerHover:hover {
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    opacity: 0.5; 
+}

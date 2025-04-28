@@ -142,3 +142,12 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+function logOut() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+}
+
+function goTestManager() {
+    window.location.href = "test_manager.html";
+}

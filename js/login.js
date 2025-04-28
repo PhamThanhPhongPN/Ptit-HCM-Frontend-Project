@@ -2,6 +2,8 @@ if (!localStorage.getItem("users")){
     localStorage.setItem("users", JSON.stringify([]))
 }
 
+
+
 function saveStorage(users) {
     localStorage.setItem("users", JSON.stringify(users))
 }
@@ -39,7 +41,12 @@ function login(event) {
         let logPass = document.getElementById("password").value;
         let users = JSON.parse(localStorage.getItem("users"));
         let viableUser = users.find(user => user.email === logEmail && user.password === logPass);
-        if (viableUser) {
+        let viableAdmin = users.find(user => user.role === "admin" && user.email === logEmail && user.password === logPass);
+        if (viableAdmin) {
+            alert('Đăng nhập thành công!');
+            localStorage.setItem("currentUser", JSON.stringify(viableAdmin));
+            window.location.href = "category_manager.html";
+        } else if (viableUser) {
             alert('Đăng nhập thành công!');
             localStorage.setItem("currentUser", JSON.stringify(viableUser));
             window.location.href = "main.html";

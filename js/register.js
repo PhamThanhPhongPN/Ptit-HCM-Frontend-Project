@@ -1,9 +1,25 @@
-if (!localStorage.getItem("users")){
-    localStorage.setItem("users", JSON.stringify([]))
+if (!localStorage.getItem("users")) {
+    localStorage.setItem("users", JSON.stringify([]));
 }
+
+let admin = {
+    name: "Phong",
+    email: "thanhphong102006@gmail.com",
+    password: "123123123",
+    role: "admin"
+};
 
 function saveStorage(users) {
     localStorage.setItem("users", JSON.stringify(users))
+}
+
+localStorage.removeItem("currentUser");
+
+let users = JSON.parse(localStorage.getItem("users"));
+
+if (!users.some(user => user.email === admin.email)) {
+    users.push(admin);
+    saveStorage(users);
 }
 
 function validateRegister(event) {
@@ -56,11 +72,9 @@ function register(event) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const users = JSON.parse(localStorage.getItem("users"))
-        users.push({name: fullName, email: email, password: password})
+        users.push({name: fullName, email: email, password: password, role: "user"})
         saveStorage(users)
-        if (confirm("Bạn có muốn chuyển sang trang đăng nhập?")){
-            window.location.href = "login.html"
-        }
+        window.location.href = "main.html"
     }
     event.target.reset()
 }

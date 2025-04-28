@@ -64,3 +64,15 @@
     background-color: #007bff;
     color: white;
 }
+
+.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    opacity: 0.5; 
+}
+
+.headerHover:hover {
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+}

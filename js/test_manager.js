@@ -88,5 +88,14 @@ function init() {
     renderTests();
 }
 
+function logOut() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+}
+
+function goCategoryManager() {
+    window.location.href = "category_manager.html";
+}
+
 document.addEventListener('DOMContentLoaded', init);
 renderTests();
