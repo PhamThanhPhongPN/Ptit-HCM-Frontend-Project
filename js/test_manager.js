@@ -22,7 +22,7 @@ function renderTests() {
             <td>${test.time}</td>
             <td>
                 <button class="btn btn-warning">Sửa</button>
-                <button class="btn btn-danger" onclick="deleteTest(${i})">Xoá</button>
+                <button class="btn btn-danger" onclick="openDeleteModal(${i})">Xoá</button>
             </td>
         </tr>`;
     }
@@ -50,31 +50,43 @@ function addTest() {
     document.getElementById('testCategory').value = '';
     document.getElementById('testQuestions').value = '';
     document.getElementById('testTime').value = '';
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modal'));
-    modal.hide();
+    document.querySelector('#modal').style.display = 'none';
+    document.querySelector('#modal').reset();
 }
 
-function init() {
-    document.getElementById('openAddTestBtn').onclick = () => {
-        const modal = new bootstrap.Modal(document.getElementById('modal'));
-        modal.show();
-    };
-
-    document.getElementById('closeAddTestBtn').onclick = () => {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('modal'));
-        modal.hide();
-    };
-
-    document.getElementById('saveAddTestBtn').onclick = addTest;
-
-    renderTests();
+function openDeleteModal(index) {
+    document.getElementById("deleteBtn").setAttribute("data-index", index);
+    document.querySelector('#deleteModal').style.display = 'block';
 }
 
-function deleteTest(index) {
+function deleteTest() {
+    const index = document.getElementById("deleteBtn").getAttribute("data-index");
     const tests = JSON.parse(localStorage.getItem('tests'));
     tests.splice(index, 1);
     saveTests(tests);
+    document.querySelector('#deleteModal').style.display = 'none';
+    renderTests();
+}
+
+function init() {
+    document.querySelector('#openAddTestBtn').onclick = () => {
+        document.querySelector('#modal').style.display = 'block';
+    };
+
+    document.querySelector('#closeAddTestBtn').onclick = () => {
+        document.querySelector('#modal').style.display = 'none';
+    };
+
+    document.querySelector('#closeDeleteBtn').onclick = () => {
+        document.querySelector('#deleteModal').style.display = 'none';
+    };
+
+    document.querySelector("#saveAddTestBtn").onclick = addTest;
+
+    document.querySelector("#deleteBtn").onclick = deleteTest;
+
     renderTests();
 }
 
 document.addEventListener('DOMContentLoaded', init);
+renderTests();

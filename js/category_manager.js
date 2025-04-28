@@ -20,10 +20,10 @@ function renderCategory() {
         dataHTML += `
         <tr>
             <td>${start + i + 1}</td>
-            <td>${paginatedCategories[i].name}</td>
+            <td>${paginatedCategories[i].emoji} ${paginatedCategories[i].name}</td>
             <td>
                 <button class="btn btn-warning" onclick="openChangeModal(${start + i})">Sửa</button>
-                <button class="btn btn-danger" onclick="deleteCategory(${start + i})">Xoá</button>
+                <button class="btn btn-danger" onclick="openDeleteModal(${start + i})">Xoá</button>
             </td>
         </tr>`;
     }
@@ -64,26 +64,31 @@ function setPage(pageNumber) {
 
 function addCategory() {
     const nameEl = document.getElementById("categoryName").value.trim();
+    const emoji = document.getElementById("emoji").value;
     const categories = JSON.parse(localStorage.getItem('categories'));
     if (categories.find(c => c.name === nameEl)) {
         alert("Tên danh mục đã tồn tại");
         return;
     }
-    categories.push({ name: nameEl });
+    categories.push({ name: nameEl , emoji: emoji });
     saveStorage(categories);
     setPage(Math.ceil(categories.length / maxItem)); 
     document.querySelector('#modal').style.display = 'none';
     document.getElementById("categoryName").value = '';
 }
 
-function deleteCategory(index) {
+function openDeleteModal(index) {
+    document.getElementById("DeleteBtn").setAttribute("data-index", index);
+    document.querySelector('#modal3').style.display = 'block';
+}
+
+function deleteCategory() {
+    const index = parseInt(document.getElementById("DeleteBtn").getAttribute("data-index"));
     const categories = JSON.parse(localStorage.getItem('categories'));
-    if (confirm("Bạn có muốn xoá danh mục này không?")) {
-        categories.splice(index, 1);
-        saveStorage(categories);
-        alert("Xoá thành công");
-        setPage(curPage); 
-    }
+    categories.splice(index, 1);
+    saveStorage(categories);
+    document.querySelector('#modal3').style.display = 'none';
+    setPage(curPage); 
 }
 
 function openChangeModal(index) {
@@ -127,6 +132,11 @@ function init() {
     };
     document.querySelector('#saveChangeBtn').onclick = changeCategory;
 
+    document.querySelector('#closeDeleteBtn').onclick = () => {
+        document.querySelector('#modal3').style.display = 'none';
+    };
+
+    document.querySelector('#DeleteBtn').onclick = deleteCategory;
     renderPagin();
     renderCategory();
 }

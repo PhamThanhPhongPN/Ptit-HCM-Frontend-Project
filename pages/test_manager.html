@@ -36,6 +36,22 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa bài test</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa bài test này không?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="deleteBtn">Confirm</button>
+                    <button class="btn btn-secondary" id="closeDeleteBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <main class="container">
             <h2>Quản lý bài test</h2>
@@ -63,29 +79,7 @@
                     <th>Hành động</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>History Quiz</td>
-                    <td>📘 Lịch sử</td>
-                    <td>15</td>
-                    <td>10 min</td>
-                    <td>
-                        <button class="btn btn-warning">Sửa</button>
-                        <button class="btn btn-danger">Xoá</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Science Challenge</td>
-                    <td>🧪 Khoa học</td>
-                    <td>20</td>
-                    <td>15 min</td>
-                    <td>
-                        <button class="btn btn-warning">Sửa</button>
-                        <button class="btn btn-danger">Xoá</button>
-                    </td>
-                </tr>
+            <tbody id="tbody">
             </tbody>
         </table>
     

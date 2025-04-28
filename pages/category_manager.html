@@ -26,8 +26,10 @@
                     <h5 class="modal-title">Thêm danh mục</h5>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="categoryName" class="form-control" placeholder="Nhập tên danh mục mới"
-                        required>
+                    <p class="input_text">Tên danh mục</p>
+                    <input type="text" id="categoryName" class="form-control" required>
+                    <p class="input_text">Emoji</p>
+                    <input type="text" id="emoji" class="form-control mt-2" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="saveAddBtn">Save changes</button>
@@ -50,6 +52,23 @@
                     <button type="button" class="btn btn-primary" id="saveChangeBtn">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="closeChangeBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modal3">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xoá danh mục</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xoá danh mục này không?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="DeleteBtn">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="closeDeleteBtn">Close</button>
                 </div>
             </div>
         </div>

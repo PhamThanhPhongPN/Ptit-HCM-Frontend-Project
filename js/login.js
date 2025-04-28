@@ -42,7 +42,7 @@ function login(event) {
         if (viableUser) {
             alert('Đăng nhập thành công!');
             localStorage.setItem("currentUser", JSON.stringify(viableUser));
-            window.location.href = "dashboard.html";
+            window.location.href = "main.html";
         } else {
             alert("Email hoặc mật khẩu không đúng");
         }
