@@ -84,7 +84,19 @@
 }
 
 .disabled {
-    color: rgba(255, 255, 255, 0.5);
+    color: white;
     pointer-events: none;
-    opacity: 0.5; 
+    font-weight: bolder;
+    font-style: underline;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+.Logo {
+    font-weight: bolder;
+    font-size: larger;
 }

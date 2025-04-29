@@ -1,9 +1,9 @@
 if (!localStorage.getItem("tests")) {
     localStorage.setItem("tests", JSON.stringify([]));
 }
-// if (localStorage.getItem("currentUser") === null) {
-//     window.location.href = "login.html";
-// }
+if (localStorage.getItem("currentUser") === null) {
+    window.location.href = "login.html";
+}
 
 function renderQuizCards() {
     const tests = JSON.parse(localStorage.getItem('tests'));

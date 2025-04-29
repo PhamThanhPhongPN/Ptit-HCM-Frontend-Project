@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <h4>QuizzForge</h4>
+        <h4 class="Logo">QuizzForge</h4>
         <div class="texts">
             <p class="disabled">Danh mục</p>
             <p onclick="goTestManager()" class="headerHover">Bài test</p>
@@ -28,8 +28,10 @@
                 <div class="modal-body">
                     <p class="input_text">Tên danh mục</p>
                     <input type="text" id="categoryName" class="form-control" required>
+                    <div id="nameError" class="error-message"></div>
                     <p class="input_text">Emoji</p>
                     <input type="text" id="emoji" class="form-control mt-2" required>
+                    <div id="emojiError" class="error-message"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="saveAddBtn">Save changes</button>
@@ -45,8 +47,13 @@
                     <h5 class="modal-title">Sửa danh mục</h5>
                 </div>
                 <div class="modal-body">
+                    <p class="input_text">Tên danh mục</p>
                     <input type="text" id="categoryChangeName" class="form-control"
                         placeholder="Nhập tên mới cho danh mục" required>
+                        <div id="nameChangeError" class="error-message"></div>
+                        <p class="input_text">Emoji</p>
+                    <input type="text" id="categoryChangeEmoji" class="form-control mt-2" placeholder="Nhập emoji mới cho danh mục" required>
+                    <div id="emojiChangeError" class="error-message"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="saveChangeBtn">Save changes</button>
@@ -60,7 +67,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xoá danh mục</h5>
+                    <h5 class="modal-title">Xác nhận xóa</h5>
                 </div>
                 <div class="modal-body">
                     <p>Bạn có chắc chắn muốn xoá danh mục này không?</p>
@@ -76,10 +83,10 @@
     <main class="container">
             <h2>Quản lý danh mục</h2>
             <button class="btn btn-primary" id="openAddBtn">Thêm danh mục</button>
-        <table class="category-table">
-            <thead>
+        <table class="category-table table">
+            <thead class="table-dark">
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Tên danh mục</th>
                     <th>Hành động</th>
                 </tr>

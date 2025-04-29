@@ -1,9 +1,14 @@
 if (!localStorage.getItem('categories')) {
-    localStorage.setItem('categories', JSON.stringify([]));
+    localStorage.setItem('categories', JSON.stringify([
+            {name: "Bio Marine Life", emoji: "🐠" },
+            {name: "Rock and Geography", emoji: "🗿" },
+            {name: "Dinosaur", emoji: "🦖" },
+    ]));
 }
 
 const maxItem = 4;
 let curPage = 1;
+let modalAdd, modalChange, modalDelete;
 
 function saveStorage(categories) {
     localStorage.setItem('categories', JSON.stringify(categories));
@@ -29,6 +34,67 @@ function renderCategory() {
     }
     tbodyEl.innerHTML = dataHTML;
 }
+
+function validateAddForm() {
+    document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
+    let isValid = true;
+
+    const name = document.getElementById('categoryName').value.trim();
+    const emoji = document.getElementById('emoji').value;
+
+    if (name.length === 0) {
+        document.getElementById('nameError').style.display = 'block';
+        document.getElementById('nameError').innerText = 'Tên danh mục không được để trống';
+        isValid = false;
+    } else if (name.length < 3 || name.length > 20) {
+        document.getElementById('nameError').style.display = 'block';
+        document.getElementById('nameError').innerText = 'Tên danh mục phải từ 3 đến 20 ký tự';
+        isValid = false;
+    }
+
+    if (emoji.length === 0) {
+        document.getElementById('emojiError').style.display = 'block';
+        document.getElementById('emojiError').innerText = 'Hãy chọn một emoji';
+        isValid = false;
+    } else if (emoji.length > 2) {
+        document.getElementById('emojiError').style.display = 'block';
+        document.getElementById('emojiError').innerText = 'Emoji không được quá 2 ký tự';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function validateChangeForm() {
+    document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
+    let isValid = true;
+
+    const name = document.getElementById('categoryChangeName').value.trim();
+    const emoji = document.getElementById('categoryChangeEmoji').value;
+
+    if (name.length === 0) {
+        document.getElementById('nameChangeError').style.display = 'block';
+        document.getElementById('nameChangeError').innerText = 'Tên danh mục không được để trống';
+        isValid = false;
+    } else if (name.length < 3 || name.length > 20) {
+        document.getElementById('nameChangeError').style.display = 'block';
+        document.getElementById('nameChangeError').innerText = 'Tên danh mục phải từ 3 đến 20 ký tự';
+        isValid = false;
+    }
+
+    if (emoji.length === 0) {
+        document.getElementById('emojiChangeError').style.display = 'block';
+        document.getElementById('emojiChangeError').innerText = 'Hãy chọn một emoji';
+        isValid = false;
+    } else if (emoji.length > 2) {
+        document.getElementById('emojiChangeError').style.display = 'block';
+        document.getElementById('emojiChangeError').innerText = 'Emoji không được quá 2 ký tự';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
 
 function renderPagin() {
     const categories = JSON.parse(localStorage.getItem('categories'));
@@ -62,24 +128,48 @@ function setPage(pageNumber) {
     renderPagin();
 }
 
-function addCategory() {
+function addCategory(event) {
+    event.preventDefault();
     const nameEl = document.getElementById("categoryName").value.trim();
     const emoji = document.getElementById("emoji").value;
     const categories = JSON.parse(localStorage.getItem('categories'));
-    if (categories.find(c => c.name === nameEl)) {
-        alert("Tên danh mục đã tồn tại");
-        return;
+    if (validateAddForm()) {
+        if (categories.find(c => c.name === nameEl)) {
+            alert("Tên danh mục đã tồn tại");
+            return;
+        }
+        categories.push({ name: nameEl , emoji: emoji });
+        saveStorage(categories);
+        setPage(Math.ceil(categories.length / maxItem)); 
+        modalAdd.hide();
+        document.getElementById("categoryName").value = '';
+        document.getElementById("emoji").value = '';
     }
-    categories.push({ name: nameEl , emoji: emoji });
-    saveStorage(categories);
-    setPage(Math.ceil(categories.length / maxItem)); 
-    document.querySelector('#modal').style.display = 'none';
-    document.getElementById("categoryName").value = '';
 }
+
+function changeCategory(event) {
+    event.preventDefault();
+    const index = parseInt(document.getElementById("saveChangeBtn").getAttribute("data-index"));
+    const newName = document.getElementById("categoryChangeName").value.trim();
+    const emoji = document.getElementById("categoryChangeEmoji").value;
+    const categories = JSON.parse(localStorage.getItem('categories'));
+    if (validateChangeForm()) {
+        if (categories.find((c, i) => c.name === newName && i !== index)) {
+            alert("Tên danh mục đã tồn tại");
+            return;
+        }
+        categories[index].name = newName;
+        categories[index].emoji = emoji;
+        saveStorage(categories);
+        renderCategory();
+        modalChange.hide();
+    }
+}
+
 
 function openDeleteModal(index) {
     document.getElementById("DeleteBtn").setAttribute("data-index", index);
-    document.querySelector('#modal3').style.display = 'block';
+    modalDelete.show();
 }
 
 function deleteCategory() {
@@ -87,31 +177,21 @@ function deleteCategory() {
     const categories = JSON.parse(localStorage.getItem('categories'));
     categories.splice(index, 1);
     saveStorage(categories);
-    document.querySelector('#modal3').style.display = 'none';
-    setPage(curPage); 
+    modalDelete.hide(); 
+    const countPage = Math.ceil(categories.length / maxItem);
+    if (curPage > countPage) {
+        curPage = countPage;
+    }
+    setPage(curPage);
 }
+
 
 function openChangeModal(index) {
     const categories = JSON.parse(localStorage.getItem('categories'));
     document.getElementById("categoryChangeName").value = categories[index].name;
+    document.getElementById("categoryChangeEmoji").value = categories[index].emoji;
     document.getElementById("saveChangeBtn").setAttribute("data-index", index);
-    document.querySelector('#modal2').style.display = 'block';
-}
-
-function changeCategory() {
-    const index = parseInt(document.getElementById("saveChangeBtn").getAttribute("data-index"));
-    const newName = document.getElementById("categoryChangeName").value.trim();
-    const categories = JSON.parse(localStorage.getItem('categories'));
-
-    if (categories.find((c, i) => c.name === newName && i !== index)) {
-        alert("Tên danh mục đã tồn tại");
-        return;
-    }
-
-    categories[index].name = newName;
-    saveStorage(categories);
-    renderCategory();
-    document.querySelector('#modal2').style.display = 'none';
+    modalChange.show();
 }
 
 function init() {
@@ -119,27 +199,40 @@ function init() {
     const targetPage = parseInt(urlParams.get('page'));
     if (targetPage) curPage = targetPage;
 
+    modalAdd = new bootstrap.Modal(document.getElementById('modal'));
+    modalChange = new bootstrap.Modal(document.getElementById('modal2'));
+    modalDelete = new bootstrap.Modal(document.getElementById('modal3'));
+
     document.querySelector('#openAddBtn').onclick = () => {
-        document.querySelector('#modal').style.display = 'block';
+        modalAdd.show();
     };
+
     document.querySelector('#closeAddBtn').onclick = () => {
-        document.querySelector('#modal').style.display = 'none';
+        modalAdd.hide();
+        document.getElementById("categoryName").value = '';
+        document.getElementById("emoji").value = '';
+        document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
     };
-    document.querySelector('#saveAddBtn').onclick = addCategory;
+
+    document.querySelector('#saveAddBtn').addEventListener('click', addCategory);
 
     document.querySelector('#closeChangeBtn').onclick = () => {
-        document.querySelector('#modal2').style.display = 'none';
+        modalChange.hide();
+        document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
     };
-    document.querySelector('#saveChangeBtn').onclick = changeCategory;
+
+    document.querySelector('#saveChangeBtn').addEventListener('click', changeCategory);
 
     document.querySelector('#closeDeleteBtn').onclick = () => {
-        document.querySelector('#modal3').style.display = 'none';
+        modalDelete.hide();
     };
 
     document.querySelector('#DeleteBtn').onclick = deleteCategory;
+
     renderPagin();
     renderCategory();
 }
+
 
 document.addEventListener('DOMContentLoaded', init);
 
