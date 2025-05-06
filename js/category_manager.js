@@ -24,9 +24,9 @@ function renderCategory() {
     for (let i = 0; i < paginatedCategories.length; i++) {
         dataHTML += `
         <tr>
-            <td>${start + i + 1}</td>
+            <td class="text-center">${start + i + 1}</td>
             <td>${paginatedCategories[i].emoji} ${paginatedCategories[i].name}</td>
-            <td>
+            <td class="text-center">
                 <button class="btn btn-warning" onclick="openChangeModal(${start + i})">Sửa</button>
                 <button class="btn btn-danger" onclick="openDeleteModal(${start + i})">Xoá</button>
             </td>
@@ -108,9 +108,9 @@ function renderPagin() {
     }
 
     document.querySelector("#pagination").innerHTML = `
-        <button onclick="setPage(${curPage - 1})">pre</button>
+        <button onclick="setPage(${curPage - 1})">&lt</button>
         ${paginHtml}
-        <button onclick="setPage(${curPage + 1})">next</button>
+        <button onclick="setPage(${curPage + 1})">&gt</button>
     `;
 }
 

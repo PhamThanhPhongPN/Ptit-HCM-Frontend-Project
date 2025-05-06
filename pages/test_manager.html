@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h4>QuizzForge</h4>
+        <h4 class="Logo">QuizzForge</h4>
         <div class="texts">
             <p onclick="goCategoryManager()" class="headerHover">Danh mục</p>
             <p class="disabled">Bài test</p>
@@ -59,35 +59,32 @@
             <button class="btn btn-primary" id="openAddTestBtn">Thêm bài test</button>   
             <div>
                 <label for="filter">Sắp xếp theo:</label>
-                <select id="filter" style="margin-left: 8px;">
+                <select id="filter" style="margin-left: 8px;" onchange="renderTests()">
                     <option value="all">Tất cả</option>
                     <option value="time">Thời gian</option>
                     <option value="questions">Số câu hỏi</option>
                 </select>
-                <input type="text" placeholder="Tìm kiếm theo tên" style="margin-left: 12px; padding: 5px;">
+                <input type="text" placeholder="Tìm kiếm theo tên" style="margin-left: 12px; padding: 5px;" id="searchInput" onkeyup="searchTests()">
             </div>
         </div>
     
-        <table class="category-table">
-            <thead>
+        <table class="category-table table">
+            <thead class="table-dark">
                 <tr>
-                    <th>#</th>
+                    <th class="text-center">ID</th>
                     <th>Tên bài test</th>
                     <th>Danh mục</th>
                     <th>Số câu hỏi</th>
                     <th>Thời gian</th>
-                    <th>Hành động</th>
+                    <th class="text-center">Hành động</th>
                 </tr>
             </thead>
             <tbody id="tbody">
             </tbody>
+
         </table>
     
-        <div class="pagination">
-            <button disabled>«</button>
-            <button class="active">1</button>
-            <button>2</button>
-            <button>»</button>
+        <div class="pagination" id="pagination">
         </div>
     </main>
     

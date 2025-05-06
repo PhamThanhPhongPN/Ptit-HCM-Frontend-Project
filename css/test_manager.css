@@ -23,6 +23,11 @@
     background-color: #f9f9f9;
 }
 
+.modal {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .btn {
     padding: 6px 12px;
     border: none;
@@ -66,13 +71,19 @@
 }
 
 .disabled {
-    color: rgba(255, 255, 255, 0.5);
+    color: white;
     pointer-events: none;
-    opacity: 0.5; 
+    font-weight: bolder;
+    font-style: underline;
 }
 
 .headerHover:hover {
     color: #007bff;
     cursor: pointer;
     font-weight: bold;
+}
+
+.Logo {
+    font-weight: bolder;
+    font-size: larger;
 }
