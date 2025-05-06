@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestPage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/testPage.css">
+</head>
+<body>
+    <header>
+        <h4>QuizzForge</h4>
+        <input type="text" placeholder="Tìm kiếm bài test">
+        <div>
+            <span>Trang chủ</span>
+            <span>Đăng xuất</span>
+        </div>
+    </header>
+
+    <main>
+        <aside class="nav-panel" id="question-nav"></aside>
+
+        <section class="quiz-section">
+            <div class="quiz-info">
+                <h2 id="test-title">Đang tải...</h2>
+                <div class="timer">
+                    <p>Thời gian: <span id="total-time">0</span> phút</p>
+                    <p>Còn lại: <span id="remaining-time">0</span> phút</p>
+                </div>
+            </div>
+            <div class="question-area">
+                <p id="question-number"></p>
+                <p id="question-text"></p>
+                <div id="answers-container"></div>
+            </div>
+
+            <div class="buttons">
+                <button id="prev-btn" class="btn btn-primary">Trước</button>
+                <button id="next-btn" class="btn btn-primary">Tiếp</button>
+                <button id="finish-btn" class="btn btn-success">Hoàn thành</button>
+            </div>
+
+            
+        </section>
+    </main>
+
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <h3>Kết quả</h3>
+            <p id="result-text"></p>
+            <button onclick="goHome()">Về trang chủ</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Quiz App. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/testPage.js"></script>
+</body>
+</html>

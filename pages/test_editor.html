@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/test_editor.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header>
+        <h4 class="Logo">QuizzForge</h4>
+        <div class="texts">
+            <p onclick="goCategoryManager()" class="headerHover">Danh mục</p>
+            <p onclick="goTestManager()" class="headerHover">Bài test</p>
+            <p onclick="logOut()" class="headerHover">Đăng xuất</p>
+        </div>
+    </header>
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Thêm/sửa câu hỏi</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <label for="questionInput" class="form-label">Câu hỏi</label>
+              <input type="text" id="questionInput" class="form-control mb-3" placeholder="Nhập câu hỏi">
+      
+              <label class="form-label">Câu trả lời</label>
+              <div id="answersContainer">
+                <div class="input-group mb-2 answer-row">
+                  <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" value="">
+                  </div>
+                  <input type="text" class="form-control" placeholder="Nhập câu trả lời">
+                  <button class="btn btn-link text-danger btn-sm delete-answer" type="button">
+                    <i class="bi bi-trash-fill"></i> 
+                    🗑️
+                  </button>
+                </div>
+              </div>
+      
+              <button class="btn btn-secondary btn-sm" id="addAnswerBtn" type="button">Thêm câu trả lời</button>
+              <div id="errorDiv" class="text-danger mb-2"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+              <button type="button" class="btn btn-primary" onclick="saveQuestion()">Lưu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa câu hỏi</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa câu hỏi này không?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="deleteBtn">Confirm</button>
+                    <button class="btn btn-secondary" id="closeDeleteBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="container">
+        <h2 class="main_text" id="formTitle">Tạo bài test</h2>
+        <div class="add_test_form">
+            <div>
+                <p class="text">Tên bài test</p>
+                <input type="text" id="testName" placeholder="Điền tên bài test" class="name_input" required>
+                <div id="testError" class="text-danger mt-2"></div>
+            </div>
+            <div class="test_type">
+                <div>
+                    <p class="text">Danh mục</p>
+                    <select id="categorySelect" class="input" required>
+                        <option value="" disabled selected>Chọn danh mục</option>
+                    </select>
+                    <div id="testError" class="text-danger mt-2"></div>
+                </div>
+                <div>
+                    <p class="text">Thời gian (phút)</p>
+                    <input type="number" id="testTime" placeholder="Thời gian tối đa" value="15" class="input" required min="1" max="120">
+                    <div id="testError" class="text-danger mt-2"></div>
+                </div>
+            </div>
+        </div>
+        <h5 class="main_text">Quản lý câu hỏi</h5>
+        <div class="buttons">
+            <button class="btn btn-primary" id="addQuestionBtn" data-bs-toggle="modal" data-bs-target="#modal">Thêm câu hỏi</button>
+            <button class="btn btn-primary" id="saveBtn">Lưu</button>
+        </div>
+        <table class="category-table table">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th>Câu hỏi</th>
+                    <th class="text-center">Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+
+        </table>
+    </main>
+    <footer>
+        <p>© 2025 Quizz App. All rights reserved.</p>
+    </footer>
+    <script src="../js/test_editor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>

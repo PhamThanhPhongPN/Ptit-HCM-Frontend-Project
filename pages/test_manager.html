@@ -17,25 +17,6 @@
             <p onclick="logOut()" class="headerHover">Đăng xuất</p>
         </div>
     </header>
-    <div class="modal" id="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Thêm bài test</h5>
-                </div>
-                <div class="modal-body">
-                    <input id="testName" type="text" class="form-control" placeholder="Tên bài test">
-                    <input id="testCategory" type="text" class="form-control mt-2" placeholder="Danh mục">
-                    <input id="testQuestions" type="number" class="form-control mt-2" placeholder="Số câu hỏi">
-                    <input id="testTime" type="text" class="form-control mt-2" placeholder="Thời gian">
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" id="saveAddTestBtn">Save</button>
-                    <button class="btn btn-secondary" id="closeAddTestBtn">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal" id="deleteModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -55,8 +36,8 @@
     
     <main class="container">
             <h2>Quản lý bài test</h2>
-        <div style="display: flex; justify-content: flex-end; margin: 10px 0; justify-content: space-between;">
-            <button class="btn btn-primary" id="openAddTestBtn">Thêm bài test</button>   
+        <div class="option">
+            <button class="btn btn-primary" onclick="goTestEditor()">Thêm bài test</button>   
             <div>
                 <label for="filter">Sắp xếp theo:</label>
                 <select id="filter" style="margin-left: 8px;" onchange="renderTests()">

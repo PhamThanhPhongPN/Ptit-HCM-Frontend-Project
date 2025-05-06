@@ -87,3 +87,10 @@
     font-weight: bolder;
     font-size: larger;
 }
+
+.option {
+    display: flex; 
+    justify-content: flex-end; 
+    margin: 10px 0; 
+    justify-content: space-between;
+}

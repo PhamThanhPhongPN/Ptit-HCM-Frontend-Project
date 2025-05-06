@@ -1,10 +1,64 @@
 if (!localStorage.getItem('tests')) {
-    localStorage.setItem('tests', JSON.stringify([
-        { id: 1, name: 'Test 1', category: 'Category 1', questions: 10, time: 30 },
-        { id: 2, name: 'Test 2', category: 'Category 2', questions: 20, time: 60 },
-        { id: 3, name: 'Test 3', category: 'Category 3', questions: 15, time: 45 }
-    ]));
+    const tests = [
+        {
+            id: 1,
+            testName: "Test 1",
+            categoryId: 1,
+            playTime: 30,
+            playAmount: 0,
+            questions: [
+                {
+                    content: "What is 2 + 2?",
+                    answers: [
+                        { answer: "3" },
+                        { answer: "4", isCorrect: true },
+                        { answer: "5" },
+                        { answer: "22" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 2,
+            testName: "Test 2",
+            categoryId: 2,
+            playTime: 45,
+            playAmount: 0,
+            questions: [
+                {
+                    content: "What is the capital of France?",
+                    answers: [
+                        { answer: "Berlin" },
+                        { answer: "Paris", isCorrect: true },
+                        { answer: "Madrid" },
+                        { answer: "Rome" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 3,
+            testName: "Test 3",
+            categoryId: 3,
+            playTime: 60,
+            playAmount: 0,
+            questions: [
+                {
+                    content: "Which planet is known as the Red Planet?",
+                    answers: [
+                        { answer: "Earth" },
+                        { answer: "Venus" },
+                        { answer: "Mars", isCorrect: true },
+                        { answer: "Jupiter" }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    localStorage.setItem('tests', JSON.stringify(tests));
 }
+
 
 const maxItem = 4;
 let curPage = 1;
@@ -18,6 +72,7 @@ function saveTests(tests) {
 
 function renderTests(searchTests = null) {
     const tests = JSON.parse(localStorage.getItem('tests')) || [];
+    const categories = JSON.parse(localStorage.getItem('categories')) || [];
     const tbody = document.querySelector('tbody');
     const selectValue = document.querySelector('#filter').value;
 
@@ -40,12 +95,17 @@ function renderTests(searchTests = null) {
         html += `
         <tr>
             <td class="text-center">${test.id}</td>
-            <td>${test.name}</td>
-            <td>${test.category}</td>
-            <td>${test.questions}</td>
-            <td>${test.time} min</td>
+            <td>${test.testName}</td>
+            <td>
+                ${(() => {
+                    const category = categories.find(cat => cat.id === test.categoryId);
+                    return category ? `${category.emoji} ${category.name}` : 'Unknown';
+                })()}
+            </td>
+            <td>${test.questions.length}</td>
+            <td>${test.playTime} min</td>
             <td class="text-center">
-                <button class="btn btn-warning">Sửa</button>
+                <button class="btn btn-sm btn-warning" onclick="editTest(${test.id})">Sửa</button>
                 <button class="btn btn-danger" onclick="openDeleteModal(${i})">Xoá</button>
             </td>
         </tr>`;
@@ -111,6 +171,10 @@ function addTest() {
     modalAdd.hide();
 }
 
+function goTestEditor() {
+    window.location.href = "test_editor.html";
+}
+
 function openDeleteModal(index) {
     document.getElementById("deleteBtn").setAttribute("data-index", index);
     modalDelete.show();
@@ -136,22 +200,12 @@ function init() {
     const targetPage = parseInt(urlParams.get('page'));
     if (targetPage) curPage = targetPage;
 
-    modalAdd = new bootstrap.Modal(document.getElementById('modal'));
     modalDelete = new bootstrap.Modal(document.getElementById('deleteModal'));
-
-    document.querySelector('#openAddTestBtn').onclick = () => {
-        modalAdd.show();
-    };
-
-    document.querySelector('#closeAddTestBtn').onclick = () => {
-        modalAdd.hide();
-    };
 
     document.querySelector('#closeDeleteBtn').onclick = () => {
         modalDelete.hide();
     };
 
-    document.querySelector("#saveAddTestBtn").onclick = addTest;
     document.querySelector("#deleteBtn").onclick = deleteTest;
 
     renderTests();
@@ -168,6 +222,11 @@ function searchTests() {
         }
     }
     renderTests(searchResult);
+}
+
+function editTest(testId) {
+    localStorage.setItem("editTestId", testId);
+    window.location.href = "test_editor.html";
 }
 
 function logOut() {

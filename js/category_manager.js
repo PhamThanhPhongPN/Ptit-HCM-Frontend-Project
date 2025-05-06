@@ -1,8 +1,8 @@
 if (!localStorage.getItem('categories')) {
     localStorage.setItem('categories', JSON.stringify([
-            {name: "Bio Marine Life", emoji: "🐠" },
-            {name: "Rock and Geography", emoji: "🗿" },
-            {name: "Dinosaur", emoji: "🦖" },
+            {id: 1, name: "Bio Marine Life", emoji: "🐠" },
+            {id: 2, name: "Rock and Geography", emoji: "🗿" },
+            {id: 3, name: "Dinosaur", emoji: "🦖" },
     ]));
 }
 
@@ -24,7 +24,7 @@ function renderCategory() {
     for (let i = 0; i < paginatedCategories.length; i++) {
         dataHTML += `
         <tr>
-            <td class="text-center">${start + i + 1}</td>
+            <td class="text-center">${paginatedCategories[i].id}</td>
             <td>${paginatedCategories[i].emoji} ${paginatedCategories[i].name}</td>
             <td class="text-center">
                 <button class="btn btn-warning" onclick="openChangeModal(${start + i})">Sửa</button>
@@ -117,16 +117,14 @@ function renderPagin() {
 function setPage(pageNumber) {
     const categories = JSON.parse(localStorage.getItem('categories'));
     const countPage = Math.ceil(categories.length / maxItem);
-
-    if (pageNumber < 1) pageNumber = 1;
-    if (pageNumber > countPage) pageNumber = countPage;
-
+    if (pageNumber < 1) return; 
+    if (pageNumber > countPage) return;
     curPage = pageNumber;
-
     window.history.pushState({}, '', "?page=" + curPage);
     renderCategory();
     renderPagin();
 }
+
 
 function addCategory(event) {
     event.preventDefault();
@@ -138,7 +136,8 @@ function addCategory(event) {
             alert("Tên danh mục đã tồn tại");
             return;
         }
-        categories.push({ name: nameEl , emoji: emoji });
+        const newId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
+        categories.push({ id: newId, name: nameEl , emoji: emoji });
         saveStorage(categories);
         setPage(Math.ceil(categories.length / maxItem)); 
         modalAdd.hide();
@@ -146,6 +145,7 @@ function addCategory(event) {
         document.getElementById("emoji").value = '';
     }
 }
+
 
 function changeCategory(event) {
     event.preventDefault();
